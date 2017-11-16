@@ -12,3 +12,8 @@ with conda:
 ```
 conda install -c conda-forge osmnx
 ```
+
+### Installing google-maps-services-python
+```
+pip install -U googlemaps
+```
