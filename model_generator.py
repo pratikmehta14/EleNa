@@ -24,6 +24,8 @@ def create_model_from_city(city_name, save_file, high_res=True, max_calls_per_ke
     add_elevation_data(city_graph, gmap_clients, api_calls_left, max_calls_per_key, high_res)
     # Save city model
     pickle(city_graph, save_file)
+    # Return city graph
+    return city_graph
     
     
 
@@ -50,6 +52,8 @@ def filter_edge_attributes(graph, attributes_to_keep):
                 attributes_to_del += [attribute]
         for attribute in attributes_to_del:
             del graph[u][v][k][attribute]
+    # return graph with deleted edges.
+    return graph
             
     end = timer()
     print("Time: {}".format(end - start))
