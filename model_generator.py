@@ -11,7 +11,7 @@ from timeit import default_timer as timer
 
 
 
-def create_model_from_city(city_name, save_file, high_res=True, max_calls_per_key=2250, gmap_keys):
+def create_model_from_city(city_name, save_file, gmap_keys, high_res=True, max_calls_per_key=2250):
     """
     Creates a multidigraph networkx model of a city, and uses gpickle to save it.
     
