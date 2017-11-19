@@ -333,17 +333,3 @@ def pickle(graph, save_file):
     nx.write_gpickle(graph, save_file + '.gpickle')
     end = timer()
     print("Time: {}".format(end - start))
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
