@@ -17,3 +17,11 @@ conda install -c conda-forge osmnx
 ```
 pip install -U googlemaps
 ```
+### GUI
+flask/app/routes.py has the code to render the HTML.
+To run flask:
+```
+cd flask
+flask run
+```
+And open templates/index.html in browser.
