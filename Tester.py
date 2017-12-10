@@ -14,8 +14,16 @@ if __name__ == '__main__':
     city = nx.read_gpickle('amherst_graph01.gpickle')
     nodes = city.nodes(data=True)
 
+    edges = city.edges(data=True)
+
     start = 66592882
-    target = 1443766272
+
+    target_minus_5 = 66715367
+    target_minus_1 = 66704462
+    target = 66592890
+
+    simple_paths = list(nx.all_simple_paths(city, target_minus_5, target, cutoff=10))
+
 
     # path = astar.astar_max_distance(city, start, target, 1.5, astar.elevation_heuristic, astar.length_heuristic)
     path = Maximize.maximize(city, start, target, 1.5, astar.elevation_heuristic, astar.length_heuristic)
