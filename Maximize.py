@@ -1,6 +1,10 @@
-import osmnx as ox, networkx as nx
-from heapq import heappush, heappop
-from itertools import count
+"""
+ Elevation gain maximization algorithm within x% of shortest path
+
+ @author: Benjamin Guinsburg
+"""
+
+import networkx as nx
 import copy
 
 
