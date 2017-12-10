@@ -2,6 +2,7 @@ from app import app
 import googlemaps
 from datetime import datetime
 import json
+from flask import render_template, jsonify, request
 
 gmaps = googlemaps.Client(key='AIzaSyBNYo6LUPnMZCgCacTyQRZV8oL1_5GJumM')
 
@@ -24,7 +25,11 @@ def index(request):
     	print (from_cds)
     	print (to_cds)
     	print (percent)
-    	print (maxmin)
+    	data = {'username': 'Pang', 'site': 'stackoverflow.com'}
 
-    return "Hello, World!"
+        
+
+        
+
+    return jsonify([{'Lat': 42.369210, 'Long': -72.500420},{'Lat': 42.369810, 'Long': -72.499116}])
 
