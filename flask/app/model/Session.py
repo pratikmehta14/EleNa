@@ -39,13 +39,13 @@ class Session_data(object):
             tgt_y, tgt_x = self.G.nodes[tgt]['y'], self.G.nodes[tgt]['x']
 
             if 'geometry' not in edge_data:
-                mid_y = tgt_y + src_y / 2
-                mid_x = tgt_x + src_x / 2
+                mid_y = (tgt_y + src_y) / 2
+                mid_x = (tgt_x + src_x) / 2
             
             else:
                 edge_linestring_coords = self.geometry[edge].coords
                 mid_idx = int(len(edge_linestring_coords) / 2) 
-                mid_y, mid_x = list(edge_linestring_coords)[mid_idx]
+                mid_x, mid_y = list(edge_linestring_coords)[mid_idx]
                 
             route_coordinates.extend([{'Lat':src_y, 'Long':src_x}, {'Lat':mid_y, 'Long':mid_x}, {'Lat':tgt_y, 'Long':tgt_x}])
         return route_coordinates
