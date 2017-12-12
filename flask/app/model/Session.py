@@ -19,6 +19,7 @@ class Session_data(object):
         return self.max_elevation_path
 
     def min_elevation_route(self):
+        print(type(self.percent_cutoff))
         self.min_elevation_route = minimize_elevation_gain(self.G,self.source,self.target,self.percent_cutoff)
         return self.min_elevation_route
 
@@ -26,10 +27,10 @@ class Session_data(object):
         route_coordinates = []
         for edge in route:
             src, tgt, edge_id = edge
-            edge_data = graph[src][tgt][edge_id]
+            edge_data = self.G[src][tgt][edge_id]
             
-            src_y, src_x = graph[src].y, graph[src].x
-            tgt_y, tgt_x = graph[tgt].y, graph[src].x
+            src_y, src_x = self.G.nodes[src]['y'], self.G.nodes[src]['x']
+            tgt_y, tgt_x = self.G.nodes[tgt]['y'], self.G.nodes[tgt]['x']
 
             if 'geometry' not in edge_data:
                 mid_y = tgt_y + src_y / 2
@@ -37,7 +38,7 @@ class Session_data(object):
             
             else:
                 edge_linestring_coords = self.geometry[edge].coords
-                mid_idx = len(edge_linestring_coords) / 2 
+                mid_idx = int(len(edge_linestring_coords) / 2) 
                 mid_y, mid_x = list(edge_linestring_coords)[mid_idx]
                 
             route_coordinates.extend([{'Lat':src_y, 'Long':src_x}, {'Lat':mid_y, 'Long':mid_x}, {'Lat':tgt_y, 'Long':tgt_x}])
