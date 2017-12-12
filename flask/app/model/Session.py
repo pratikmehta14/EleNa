@@ -20,9 +20,9 @@ class Session_data(object):
         self.target = ox.get_nearest_node(self.G,(tgt_coords[0],tgt_coords[1]))
         self.percent_cutoff = percent_cutoff
         
-    def max_elevation_path(self):
-        self.max_elevation_path = maximize(self.G,self.source,self.target,self.percent_cutoff)        
-        return self.max_elevation_path
+    def max_elevation_route(self):
+        self.max_elevation_route = maximize(self.G,self.source,self.target,self.percent_cutoff)        
+        return self.max_elevation_route
 
     def min_elevation_route(self):
         print(type(self.percent_cutoff))
