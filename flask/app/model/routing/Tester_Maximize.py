@@ -1,4 +1,4 @@
-import Maximize
+import max_search
 import model_generator as mg
 import osmnx as ox, networkx as nx
 import googlemaps
