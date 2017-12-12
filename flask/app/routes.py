@@ -1,10 +1,11 @@
+import sys
 from app import app
 import googlemaps
 from datetime import datetime
 import json
 from flask import render_template, jsonify, request
 from osmnx.utils import get_nearest_node
-from EleNa.model import Session_data
+from .model.Session import Session_data
 
 gmaps = googlemaps.Client(key='AIzaSyBNYo6LUPnMZCgCacTyQRZV8oL1_5GJumM')
 
@@ -22,7 +23,6 @@ def index(request):
 		print (from_cds)
 		print (to_cds)
 		print (percent)
-
 		current_session = Session_data(from_cds,to_cds,percent)
 		
 		if maxmin == 'min':

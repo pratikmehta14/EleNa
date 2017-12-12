@@ -1,13 +1,13 @@
 import osmnx.utils as ox
 import networkx as nx
-from routing.max_search import maximize
-from routing.min_search import minimize_elevation_gain
+from .routing.max_search import maximize
+from .routing.min_search import minimize_elevation_gain
 
-class Session_data(object):
-    G = nx.read_gpickle("/Users/pratikm/projects/fall2017/520/EleNa/model/amherst_graph01.gpickle") 
-    geometry = nx.get_edge_attributes(G,'geometry')
+class Session_data():
 
     def __init__(self, src_coords, tgt_coords, percent_cutoff):
+        self.G = nx.read_gpickle("/Users/pratikm/projects/fall2017/520/EleNa/flask/app/model/amherst_graph01.gpickle")
+        self.geometry = nx.get_edge_attributes(G,'geometry')
         self.source_coords = src_coords
         self.target_coords = tgt_coords
         self.source = ox.get_nearest_node(G,src_coords[0],src_coords[1])
@@ -15,11 +15,11 @@ class Session_data(object):
         self.percent_cutoff = percent_cutoff
         
     def max_elevation_path():
-        self.max_elevation_path = maximize(G,self.source,self.target,self.percent_cutoff)        
+        self.max_elevation_path = maximize(self.G,self.source,self.target,self.percent_cutoff)        
         return self.max_elevation_path
 
     def min_elevation_route():
-        self.min_elevation_route = minimize_elevation_gain(G,self.source,self.target,self.percent_cutoff)
+        self.min_elevation_route = minimize_elevation_gain(self.G,self.source,self.target,self.percent_cutoff)
         return self.min_elevation_route
 
     def route_coordinates(route):
@@ -36,7 +36,7 @@ class Session_data(object):
                 mid_x = tgt_x + src_x / 2
             
             else:
-                edge_linestring_coords = geometry[edge].coords
+                edge_linestring_coords = self.geometry[edge].coords
                 mid_idx = len(edge_linestring_coords) / 2 
                 mid_y, mid_x = list(edge_linestring_coords)[mid_idx]
                 
