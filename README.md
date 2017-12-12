@@ -18,9 +18,6 @@ conda install -c conda-forge osmnx
 pip install -U googlemaps
 
 ```
-###Update PYTHONPATH
-./setup.sh
-
 ### GUI
 flask/app/routes.py has the code to render the HTML.
 To run flask:
@@ -30,3 +27,5 @@ export FLASK_APP=microblog.py
 flask run
 ```
 And open templates/index.html in browser.
+
+#****Manually change the assigned directory of self.G in flask/app/model/Session.py****

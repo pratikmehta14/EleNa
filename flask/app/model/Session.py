@@ -1,3 +1,9 @@
+"""
+Graph data, routing APIs, and route formatting for GUI
+
+@author: Pratik Mehta
+"""
+
 import osmnx.utils as ox
 import networkx as nx
 from .routing.max_search import maximize
