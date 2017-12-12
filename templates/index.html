@@ -279,7 +279,14 @@
             if (status == google.maps.GeocoderStatus.OK) {
               if (results[0]) {
                 document.activeElement.id.value = results[0].formatted_address;
-                alert(results[0].formatted_address);
+                //alert(results[0].formatted_address);
+				if (!$("#pac-input").val()) {
+                  $('#pac-input').val(event.latLng);
+				  $('#pac-input').val($('#pac-input').val().slice(1, -1));
+                } else if (!$("#pac-output").val()){
+                  $('#pac-output').val(event.latLng);
+				  $('#pac-output').val($('#pac-output').val().slice(1, -1));
+                }
               }
             }
           });
