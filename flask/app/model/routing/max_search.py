@@ -40,8 +40,7 @@ def maximize(graph, source, target, percent_shortest_path,):
 
         #remove all nodes except currentNode and nextNode for the graph for this function
         graph_truncated = copy.deepcopy(graph)
-        # graph_truncated.remove_nodes_from(shortest_path[0:i]+shortest_path[i+2:])
-        graph_truncated.remove_nodes_from(shortest_path[0:offset] + shortest_path[offset + 2:])
+        graph_truncated.remove_nodes_from(working_path[0:offset] + working_path[offset + 2:])
         interPaths = nx.all_simple_paths(graph_truncated, currentNode, nextNode, cutoff=10)
 
         #find path in interPaths that has highest ele-gain

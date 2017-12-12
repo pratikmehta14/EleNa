@@ -1,5 +1,4 @@
 import max_search
-import model_generator as mg
 import osmnx as ox, networkx as nx
 import googlemaps
 
@@ -20,7 +19,7 @@ if __name__ == '__main__':
 
 
     shortest_path = nx.shortest_path(city, start, target, 'length')
-    path = Maximize.maximize(city, start, target, 1.5)
+    path = max_search.maximize(city, start, target, 1.5)
 
     print("elevation gain for this path is %d, elevation gain of shortest path is: %d" % (pathGain(city, path), pathGain(city, shortest_path)))
 
