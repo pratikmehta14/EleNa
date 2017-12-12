@@ -23,11 +23,16 @@ def index(request):
 		print (from_cds)
 		print (to_cds)
 		print (percent)
-		current_session = Session_data(from_cds,to_cds,percent)
+		print (maxmin)
+
+		current_session = Session_data(from_cds,to_cds,int(percent))
 		
 		if maxmin == 'min':
+			print ("Minimum elevation route follows these co-ordinates:")
 			min_elevation_route_coords = current_session.route_coordinates(current_session.min_elevation_route())
+			print (min_elevation_route_coords)
 			return jsonify(min_elevation_route_coords)
+
 		elif maxmin == 'max':
 			pass
 
