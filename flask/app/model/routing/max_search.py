@@ -30,7 +30,6 @@ def maximize(graph, source, target, percent_shortest_path,):
     max_length = shortest_path_len * percent_shortest_path
 
     alternate_paths_list = []
-    # alternate_paths_dict = {}       #[ (currentNode, nextNode) ]-->[ (path, ele_gain/length) ]
 
     #loop over nodes in the path to build alternate_paths_dict
     for i in range(len(shortest_path)-1):
@@ -59,19 +58,12 @@ def maximize(graph, source, target, percent_shortest_path,):
 
             if (ele_gain < 0): continue
 
-            #if the whole new path is longer than allowed, disregard it
-            # if (pathLength(graph, working_path[0:offset] + path + working_path[offset+2:]) > max_length):
-            #     continue
-
             if (ele_gain > ele_gain_max):
                 ele_gain_max = ele_gain
                 path_length = length
                 biggestPath = path
 
         biggest_path_length = len(biggestPath)
-        # if (biggest_path_length == 0):
-        #     biggestPath = [currentNode, nextNode]
-        #     biggest_path_length += 2
 
         if (path_length != 0 and biggest_path_length != 2):
             alternate_paths_list.append( (ele_gain_max/path_length, biggestPath, currentNode, nextNode) )
