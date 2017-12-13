@@ -29,12 +29,14 @@ def index(request):
 		
 		if maxmin == 'min':
 			print ("Minimum elevation route follows these co-ordinates:")
-			min_elevation_route_coords = current_session.route_coordinates(current_session.min_elevation_route())
-			print (min_elevation_route_coords)
-			return jsonify(min_elevation_route_coords)
-
+			route_coords = current_session.route_coordinates(current_session.min_elevation_route())
+			print (route_coords)
+			
 		elif maxmin == 'max':
-			pass
+			print ("Maximum elevation route follows these co-ordinates:")
+			route_coords = current_session.route_coordinates(current_session.max_elevation_route())
+			print (route_coords)
 
+	return jsonify(route_coords)
 	#return jsonify([{'Lat': 42.369210, 'Long': -72.500420},{'Lat': 42.369810, 'Long': -72.499116}])
 
