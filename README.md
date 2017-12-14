@@ -1,6 +1,13 @@
 # EleNa
 Elevation-based navigation
 
+# By RandomMax:
+Bhuvana Surapaneni
+Jeremy Doyle
+Benjamin Guinsburg
+Dilip Chakravarthy Kavarthapu
+Pratik Mehta
+
 ### Installing OSMnx
 with pip:
 ```
