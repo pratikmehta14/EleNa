@@ -8,11 +8,12 @@ import osmnx.utils as ox
 import networkx as nx
 from .routing.max_search import maximize
 from .routing.min_search import minimize_elevation_gain
+import inspect, os
 
 class Session_data(object):
 
     def __init__(self, src_coords, tgt_coords, percent_cutoff):
-        self.G = nx.read_gpickle("/Users/kdilipchakravarthy/Downloads/EleNa-master-4/flask/app/model/amherst_graph01.gpickle")
+        self.G = nx.read_gpickle(os.path.dirname(os.path.abspath(inspect.stack()[0][1])) + "/amherst_graph01.gpickle")
         self.geometry = nx.get_edge_attributes(self.G,'geometry')
         self.source_coords = src_coords
         self.target_coords = tgt_coords
