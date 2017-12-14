@@ -25,7 +25,7 @@ def index(request):
 		print (percent)
 		print (maxmin)
 
-		current_session = Session_data(from_cds,to_cds,int(percent))
+		current_session = Session_data(from_cds,to_cds,float(int(percent)/100))
 		
 		if maxmin == 'min':
 			print ("Minimum elevation route follows these co-ordinates:")
