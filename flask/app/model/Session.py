@@ -12,7 +12,7 @@ from .routing.min_search import minimize_elevation_gain
 class Session_data(object):
 
     def __init__(self, src_coords, tgt_coords, percent_cutoff):
-        self.G = nx.read_gpickle("/Users/pratikm/projects/fall2017/520/EleNa/flask/app/model/amherst_graph01.gpickle")
+        self.G = nx.read_gpickle("/Users/kdilipchakravarthy/Downloads/EleNa-master-4/flask/app/model/amherst_graph01.gpickle")
         self.geometry = nx.get_edge_attributes(self.G,'geometry')
         self.source_coords = src_coords
         self.target_coords = tgt_coords
@@ -48,5 +48,17 @@ class Session_data(object):
                 mid_x, mid_y = list(edge_linestring_coords)[mid_idx]
                 
             route_coordinates.extend([{'Lat':src_y, 'Long':src_x}, {'Lat':mid_y, 'Long':mid_x}, {'Lat':tgt_y, 'Long':tgt_x}])
-        return route_coordinates
+
+        route_cds = []
+
+        if (len(route_coordinates)>23):
+            ll = int (len(route_coordinates)/23 + 1)
+            i = 0
+            while (i<len(route_coordinates)):
+                route_cds.extend([{'Lat':route_coordinates[i]['Lat'], 'Long':route_coordinates[i]['Long']}])
+                i = i+ll
+
+        #route_cds = route_cds[2:-2]
+
+        return route_cds
 
