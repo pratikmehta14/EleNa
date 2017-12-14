@@ -419,7 +419,7 @@
       function calculateAndDisplayRoute(directionsService, directionsDisplay, checkboxArray) {
         var waypts = [];
         //var checkboxArray = document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
+        for (var i = 1; i < checkboxArray.length-1; i++) {
           waypts.push({
             location:new google.maps.LatLng(checkboxArray[i].Lat, checkboxArray[i].Long),
             stopover:true
@@ -427,11 +427,11 @@
         }
 
         directionsService.route({
-          origin: document.getElementById('pac-input').value,
-          destination: document.getElementById('pac-output').value,
+          origin: new google.maps.LatLng(checkboxArray[0].Lat, checkboxArray[0].Long),
+          destination: new google.maps.LatLng(checkboxArray[checkboxArray.length-1].Lat, checkboxArray[checkboxArray.length-1].Long),
           waypoints: waypts,
           optimizeWaypoints: true,
-          travelMode: 'BICYCLING'
+          travelMode: 'WALKING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
