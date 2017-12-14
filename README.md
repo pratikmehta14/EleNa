@@ -1,7 +1,7 @@
 # EleNa
 Elevation-based navigation
 
-# By RandomMax:
+### By RandomMax:
 Bhuvana Surapaneni
 Jeremy Doyle
 Benjamin Guinsburg
