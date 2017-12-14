@@ -29,7 +29,7 @@ def index(request):
 		
 		if maxmin == 'min':
 			print ("Minimum elevation route follows these co-ordinates:")
-			route_coords = current_session.route_coordinates(current_session.min_elevation_route())
+			route_coords = current_session.route_coordinates(current_session.min_elevation_route()[2])
 			print (route_coords)
 			
 		elif maxmin == 'max':
