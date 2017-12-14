@@ -1,15 +1,39 @@
 # -*- coding: utf-8 -*-
 """
-Elevation gain minimization algorithm within x% of shortest path
+Elevation gain minimization algorithms within x% of shortest path
 
 @author: Jeremy Doyle
 """
 import networkx as nx
 
-# Finds the edges used when finding the shortest path for min_weight
-# Returning the length, and elevation gain, sum of these edges, and a list of
-# keys for each edge.
+
 def find_path_edges(graph, path, min_weight='grade'):
+	"""
+    Given a path as a list of nodes, and the weight that was used when finding 
+    the shortest path, finds the edge that was used to minimize the weight 
+    between each node in the list. For convieniece this function returns the 
+    length and elevation gain found along all of these edges, in addition to 
+    the list of keys that corisponds to these edges.
+        
+    Parameters:
+    -----------
+    graph: NetworkX MultiDiGraph
+        The graph that this path belongs to.
+    path: list of int
+        Each int should represent a node id in the graph along a path.
+    min_weight: string
+        The weight that was minimized when finding this path.
+        
+    Returns: 
+    --------
+    path_length: float
+        The total distance along every edge found
+    path_ele_gain: float
+        The total elevation gain along every edge found
+    path_edge_keys: list of int
+        Each int represents the key of the edge between two consecutive nodes 
+        in path which minimizes min_weight.        
+	"""    
 	path_length = 0
 	path_ele_gain = 0
 	path_edge_keys = []
@@ -21,28 +45,78 @@ def find_path_edges(graph, path, min_weight='grade'):
 		path_edge_keys.append(min_weight_edge)
 	return (path_length, path_ele_gain, path_edge_keys)
 
-# Takes a list of nodes, and a list of keys for each edge,
-# returns list of (u, v, key) for each edge
+
 def edge_path(node_path, edge_keys):
+	"""
+    Given a path as a list of nodes, and the key representing the edge between
+    each node in the list, returns the path as a list of edges in the form
+    (u, v, key).
+    
+    Parameters:
+    -----------
+    node_path: list of int
+        Each int should represent a node id in the graph along a path.
+    edge_keys: list of int
+        Each int should represent the key of the edge between two nodes in
+        node_path.
+        
+    Returns: 
+    --------
+    edge_path: list of (int, int, int)
+        Each tuple (u, v, key) in the list represents an edge in the graph:
+        graph[u][v][key].
+	"""
 	edge_path = []
 	for i in range(len(node_path) - 1):
 		edge_path.append((node_path[i], node_path[i + 1], edge_keys[i]))
 	return edge_path
 
-# Binary search over shortest weight paths where the weight is a linear 
-# combination of normalized distances and elevation gains to minimize elevation
-# gain within x% of shortest distance path
+
+
 def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterations=10):
-	# Enforce x% of shortest path between 1 and 2
-	# TODO
+	"""
+    Minimizes elevation gain within constraint of x% of the shortest path by 
+    performing a binary search over alpha(between 1.0 and 0.0) such that each 
+    iteration calculates a new weight for every edge as the linear combination
+    of alpha * normalized distance + (1 - alpha) * normalized elevation gain, 
+    and finds the resulting shortest weighted path.
+    
+    Parameters:
+    -----------
+    graph: NetworkX MultiDiGraph
+        The graph to perform the search on.
+    source: int
+        The node id of the source point.
+    target: int
+        The node id of the target point.
+    percent_shortest_path: float (> 1.0)
+        The constraint of the maximum distance allowed, represented as a 
+        percentage of the shorted distance path (1.0 = 100%).
+    iterations: int
+        The maximum number of iterations of the binary search to perform, at 
+        which point the algorithm will return the best path found thus far. 
+        The default here is 10, which was found to be a decent trade-off 
+        between runtime and result performance.
+        
+    Returns: 
+    --------
+    best_path_dist: float
+        The total distance of the best path found
+    best_path_gain: float
+        The total elevation gain of the best path found
+    best_edge_path: list of (int, int, int)
+        Each tuple (u, v, key) in the list represents an edge in the graph:
+        graph[u][v][key]. The resulting list of edges is the best path found to
+        minimize elevation gain given the constraint        
+	"""
+	# Enforce x% of shortest path 1.0 or larger
+	if percent_shortest_path < 1.0:
+		raise Exception("Cannot find a path shorter than the shortest path.")
 	
 	# Find shortest distance path
 	min_dist, min_dist_path = nx.single_source_dijkstra(graph, source, target, weight='length')
 	_, min_dist_ele_gain, min_dist_keys = find_path_edges(graph, min_dist_path, min_weight='length')
 	# Set maximum distance willing to travel
-	print (type(min_dist))
-	#print (type(max_dist))
-	print (type(percent_shortest_path))
 	max_dist = min_dist * percent_shortest_path
 	
 	# Find total distance and elevation gain of the edges for normalization
@@ -108,14 +182,13 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 	
 	# Return the lowest elevation gain within max distance
 	best_path = min(paths_found, key=lambda d: d['ele_gain'])
-	############################################################################
-	# Uncomment to view path results                                           #
-	#                                                                          #
-	#print('Max distance:', max_dist, ', Path distance:', best_path['length'], #
-	#      ', Path elevation gain:', best_path['ele_gain'])                    #
-	#                                                                          #
-	############################################################################
-	return edge_path(best_path['path'], best_path['keys'])
+	best_path_dist = best_path['length']
+	best_path_gain = best_path['ele_gain']
+	best_edge_path = edge_path(best_path['path'], best_path['keys'])
+    
+	return (best_path_dist, best_path_gain, best_edge_path)
+
+
 	
 ##############################################################################
 # Uncomment to test a single case                                            #
