@@ -450,6 +450,8 @@
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
             }
+            summaryPanel.innerHTML += '<b>Total Elevation Gain: </b>' + elevation + '<br>';
+            summaryPanel.innerHTML += '<b>Total Distance: </b>' + distance;
           } else {
             window.alert('Directions request failed due to ' + status);
           }
