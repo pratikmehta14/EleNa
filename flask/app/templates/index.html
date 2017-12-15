@@ -251,18 +251,19 @@
 
 
 
-        $( "#submit" ).click(function() {
+		$( "#submit" ).click(function() {
 
-                $.get("http://127.0.0.1:5000/"+ encodeURIComponent($("#pac-input").val()) + ":" + encodeURIComponent($("#pac-output").val()) + ":" + encodeURIComponent($("#slider").val()) + ":" + encodeURIComponent($("#flip-1").val())).done(function (data) {
-                      
-                    //alert( "Data Loaded: " + data);
-                    //console.log(data);
-
-                    calc(data);
-
-                })
-
-              });
+				$.get("http://127.0.0.1:5000/"+ encodeURIComponent($("#pac-input").val()) + ":" + encodeURIComponent($("#pac-output").val()) + ":" + encodeURIComponent($("#slider").val()) + ":" + encodeURIComponent($("#flip-1").val())).done(function (data) {
+       
+					//alert( "Data Loaded: " + data);
+					//console.log(data);
+					elevation = data.elevation
+					distance = data.distance
+					waypoints = data.waypoints
+					
+					calc(waypoints);
+				})
+			  });
 
 
 
