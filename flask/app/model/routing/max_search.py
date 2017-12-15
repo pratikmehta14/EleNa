@@ -8,6 +8,70 @@ import networkx as nx
 import copy
 
 
+def find_path_edges(graph, path, max_weight='ele_gain'):
+	"""
+    Given a path as a list of nodes, and the weight to maximize, finds the 
+    edges that will maximize the weight between each node in the list. For 
+    convieniece this function returns the length and elevation gain found along
+    all of these edges, in addition to the list of keys that corisponds to 
+    these edges.
+        
+    Parameters:
+    -----------
+    graph: NetworkX MultiDiGraph
+        The graph that this path belongs to.
+    path: list of int
+        Each int should represent a node id in the graph along a path.
+    min_weight: string
+        The weight that will be maximized along the path.
+        
+    Returns: 
+    --------
+    path_length: float
+        The total distance along every edge found
+    path_ele_gain: float
+        The total elevation gain along every edge found
+    path_edge_keys: list of int
+        Each int represents the key of the edge between two consecutive nodes 
+        in path which minimizes min_weight.        
+	"""    
+	path_length = 0
+	path_ele_gain = 0
+	path_edge_keys = []
+	for i in range(len(path) - 1):
+		edges = graph[path[i]][path[i + 1]]
+		min_weight_edge = max(edges.keys(), key=lambda k: edges[k][max_weight])
+		path_length += edges[min_weight_edge]['length']
+		path_ele_gain += edges[min_weight_edge]['ele_gain']
+		path_edge_keys.append(min_weight_edge)
+	return (path_length, path_ele_gain, path_edge_keys)
+
+def edge_path(node_path, edge_keys):
+	"""
+    Given a path as a list of nodes, and the key representing the edge between
+    each node in the list, returns the path as a list of edges in the form
+    (u, v, key).
+    
+    Parameters:
+    -----------
+    node_path: list of int
+        Each int should represent a node id in the graph along a path.
+    edge_keys: list of int
+        Each int should represent the key of the edge between two nodes in
+        node_path.
+        
+    Returns: 
+    --------
+    edge_path: list of (int, int, int)
+        Each tuple (u, v, key) in the list represents an edge in the graph:
+        graph[u][v][key].
+	"""
+	edge_path = []
+	for i in range(len(node_path) - 1):
+		edge_path.append((node_path[i], node_path[i + 1], edge_keys[i]))
+	return edge_path
+
+
 """
 Given a graph, networkx will generate the shortest path P from source to target based on length.
 
@@ -49,12 +113,7 @@ def maximize(graph, source, target, percent_shortest_path,):
         biggestPath = []
 
         for path in interPaths:
-            ele_gain=0
-            length=0
-
-            for node in range(len(path)-1):
-                ele_gain += graph[path[node]][path[node + 1]][0]['ele_gain']
-                length += graph[path[node]][path[node + 1]][0]['length']
+            ele_gain, length, _ = find_path_edges(graph, path)
 
             if (ele_gain < 0): continue
 
@@ -66,30 +125,25 @@ def maximize(graph, source, target, percent_shortest_path,):
         biggest_path_length = len(biggestPath)
 
         if (path_length != 0 and biggest_path_length != 2):
-            alternate_paths_list.append( (ele_gain_max/path_length, biggestPath, currentNode, nextNode) )
+            alternate_paths_list.append( (ele_gain_max/path_length, path_length, biggestPath, currentNode, nextNode) )
 
 
     alternate_paths_list.sort(key=lambda  tup: tup[0], reverse=True)
 
     #loop over alternate_paths_list, and insert into working path
     for tuple in alternate_paths_list:
-        working_path = insertPath(graph, working_path, tuple[1], tuple[2], tuple[3], max_length)
+        working_path = insertPath(graph, working_path, tuple[1], tuple[2], tuple[3], tuple[4], max_length)
+
+    best_dist, best_gain, best_keys = find_path_edges(graph, working_path)
+    best_path = edge_path(working_path, best_keys)
+    return (best_dist, best_gain, best_path)
 
 
-    return working_path
-
-
-def pathLength(graph, path):
-    path_length = 0
-    for node in range(len(path) - 1):
-        path_length += graph[path[node]][path[node + 1]][0]['length']
-    return path_length
-
-def insertPath(graph, working_path, path, node1, node2, max_length):
+def insertPath(graph, working_path, path_length, path, node1, node2, max_length):
     node1_ind = working_path.index(node1)
     node2_ind = working_path.index(node2)
 
-    if (pathLength(graph, working_path[0:node1_ind] + path + working_path[node2_ind+1:]) > max_length):
+    if path_length > max_length:
         return working_path
     else:
         return working_path[0:node1_ind] + path + working_path[node2_ind + 1:]
