@@ -4,7 +4,7 @@ Elevation gain minimization algorithms within x% of shortest path
 
 @author: Jeremy Doyle
 """
-import networkx as nx
+import networkx as nx, osmnx as ox
 
 
 def find_path_edges(graph, path, min_weight='grade'):
@@ -185,6 +185,12 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 	best_path_dist = best_path['length']
 	best_path_gain = best_path['ele_gain']
 	best_edge_path = edge_path(best_path['path'], best_path['keys'])
+    
+	# Show path on actual data model
+	# Note: Google Maps and OpenStreetMaps have different data and our UI path
+	# may differ from the actual path because of Google Map's intepretation of 
+	# the data it recieves.
+	ox.plot_graph_route(graph, best_path['path'])
     
 	return (best_path_dist, best_path_gain, best_edge_path)
 

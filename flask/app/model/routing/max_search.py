@@ -4,7 +4,7 @@
  @author: Benjamin Guinsburg
 """
 
-import networkx as nx
+import networkx as nx, osmnx as ox
 import copy
 
 
@@ -133,7 +133,13 @@ def maximize(graph, source, target, percent_shortest_path,):
     #loop over alternate_paths_list, and insert into working path
     for tuple in alternate_paths_list:
         working_path = insertPath(graph, working_path, tuple[1], tuple[2], tuple[3], tuple[4], max_length)
-
+        
+    # Show path on actual data model
+    # Note: Google Maps and OpenStreetMaps have different data and our UI path
+    # may differ from the actual path because of Google Map's intepretation of 
+    # the data it recieves.
+    ox.plot_graph_route(graph, working_path)
+    
     best_dist, best_gain, best_keys = find_path_edges(graph, working_path)
     best_path = edge_path(working_path, best_keys)
     return (best_dist, best_gain, best_path)
