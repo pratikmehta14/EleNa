@@ -21,7 +21,7 @@ conda install -c conda-forge osmnx
 pip install -U googlemaps
 
 ```
-### Using the Application
+# Using the Application
 Download CORS Google Chrome Extension:  
 https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
 
@@ -30,7 +30,12 @@ flask/app/routes.py has the code to render the HTML.
 To run flask:
 ```
 cd flask
+__________________________________________
 export FLASK_APP=microblog.py #On OSX
+set FLASK_APP=microblog.py    #On Windows
+__________________________________________
 flask run
 ```
 Open templates/index.html in Google Chrome web browser.
+
+### Using the Interface
