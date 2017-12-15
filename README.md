@@ -30,7 +30,7 @@ flask/app/routes.py has the code to render the HTML.
 To run flask:
 ```
 cd flask
-export FLASK_APP=microblog.py (on OSX)
+export FLASK_APP=microblog.py #On OSX
 flask run
 ```
 Open templates/index.html in Google Chrome web browser.
