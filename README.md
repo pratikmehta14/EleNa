@@ -39,4 +39,4 @@ flask run
 Open templates/index.html in Google Chrome web browser.
 
 ### Using the Interface
-(EleNa/EleNa.PNG?raw=true "Interface")
+![EleNa Interface](EleNa/EleNa.PNG?raw=true "Interface")
