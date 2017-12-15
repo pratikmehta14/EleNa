@@ -442,6 +442,9 @@
             var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML = '';
             // For each route, display summary information.
+            summaryPanel.innerHTML += '<b>Total Elevation Gain: </b>' + elevation + '<br>';
+            summaryPanel.innerHTML += '<b>Total Distance: </b>' + distance +'<br>';
+            summaryPanel.innerHTML += '<b>Route:- (Scroll Down) </b><br>';
             for (var i = 0; i < route.legs.length; i++) {
               var routeSegment = i + 1;
               summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
@@ -450,8 +453,6 @@
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
             }
-            summaryPanel.innerHTML += '<b>Total Elevation Gain: </b>' + elevation + '<br>';
-            summaryPanel.innerHTML += '<b>Total Distance: </b>' + distance;
           } else {
             window.alert('Directions request failed due to ' + status);
           }
