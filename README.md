@@ -22,13 +22,15 @@ pip install -U googlemaps
 
 ```
 ### GUI
-flask/app/routes.py has the code to render the HTML.
+Download CORS Google Chrome Extension:  
+https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
+
+Open templates/index.html in Google Chrome web browser.  
+
+flask/app/routes.py has the code to render the HTML.  
 To run flask:
 ```
 cd flask
 export FLASK_APP=microblog.py
 flask run
 ```
-And open templates/index.html in browser.
-
-#****Manually change the assigned directory of self.G in flask/app/model/Session.py****
