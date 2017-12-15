@@ -24,6 +24,7 @@ pip install -U googlemaps
 ### Using the Application
 Download CORS Google Chrome Extension:  
 https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
+
 Make sure you have osmnx and googlemaps installed.
 flask/app/routes.py has the code to render the HTML.  
 To run flask:
