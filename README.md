@@ -34,9 +34,16 @@ __________________________________________
 export FLASK_APP=microblog.py #On OSX
 set FLASK_APP=microblog.py    #On Windows
 __________________________________________
-flask run
+flask run                     #Alternatively: python -m flask run
 ```
 Open templates/index.html in Google Chrome web browser.
 
 ### Using the Interface
-![EleNa Interface](EleNa/EleNa.PNG?raw=true "Interface")
+![EleNa Interface](EleNa/EleNa.PNG "Interface")
+
+1. Here, you would click somewhere on the map to the left to input a starting point for your route, then you would click elsewhere on the map to input your destination. Alternatively, you may also manually enter those points in the space provided.
+2. This slider determines how much longer the generated route will be than the shortest route between your two points. Going from 100%, which returns the shortest route, up to 200%, or twice as long as the shortest route.
+3. This dropdown menu will let you select whether you want to have more elevation gain in your path, or less. That is to say, would you like to have more uphill segments along your route? or would you like to have more downhill or flat segments along your route?
+4. This button takes the provided information and calculates a path for you given the constrains that you have set.
+5. This box will contain the elevation gain of the generated route, its total length, as well as specific information about the segments of the generated route.
+6. This map is used to specify where you'd like your start and endpoints to be, and once a route is created for you, it will be drawn onto this map.
