@@ -61,6 +61,6 @@ In this example, we try to minimize elevation gain along our route from Valley L
 
 
 ### Maximization
-![EleNa Interface](Pictures/EleNa_example_max.PNG)
+![EleNa Interface](Pictures/EleNa_example_maximum.PNG)
 
 In this example, we try to maximize elevation gain along our route starting from the Haigis Mall in Umass Amherst, and ending on Olympia Drive, Amherst. The two addresses and written into the appropriate boxes and we change the slider to be 200%, and choose to maxmize elevation by choosing "maximum" under the "Elevation" dropdown menu. After clicking submit, we have a path with many uphill segments.
