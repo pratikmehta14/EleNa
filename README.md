@@ -39,7 +39,7 @@ flask run                     #Alternatively: python -m flask run
 Open templates/index.html in Google Chrome web browser.
 
 ### Using the Interface
-![EleNa Interface](EleNa/EleNa.PNG "Interface")
+![EleNa Interface](EleNa.PNG "Interface")
 
 1. Here, you would click somewhere on the map to the left to input a starting point for your route, then you would click elsewhere on the map to input your destination. Alternatively, you may also manually enter those points in the space provided.
 2. This slider determines how much longer the generated route will be than the shortest route between your two points. Going from 100%, which returns the shortest route, up to 200%, or twice as long as the shortest route.
