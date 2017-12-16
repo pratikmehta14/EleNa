@@ -140,17 +140,19 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 	# minimization of the linear combination was within max distance,
 	# decreasing alpha if the path was longer than the max distance.
 	for _ in range(iterations):
-		
+		print ("Min_elevation iter #",_)
 		# Create new grades based on binary search of linear combination
 		# of normalized distances and elevation gains
 		for u, v, k, data in graph.edges(keys=True, data=True):
 				graph.add_edge(u, v, key = k, grade = 
 							  alpha*data['ele_gain']/total_ele_gain +
 							  (1-alpha)*data['length']/total_dist)
-		
+		print ('Edges added')
 		# Find shortest path for new grade
 		path = nx.shortest_path(graph, source, target, weight='grade')
 		path_length, path_ele_gain, path_keys = find_path_edges(graph, path)
+
+		print ('Returned from find_path_edges')
 		
 		############################################
 		# Uncomment to view each iteration         #
@@ -164,6 +166,7 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 			# Add it to the list of paths to pick from
 			paths_found.append({'path': path, 'length': path_length, 
 								'ele_gain': path_ele_gain, 'keys': path_keys})
+			print ("Appended paths_found")
 			# Increase alpha min to search higher alphas
 			# (weight ele_gain higher in linear combination)
 			alpha_min = alpha
@@ -173,11 +176,13 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 				break            
 		# If the path found has a longer distance than the max,
 		else:
+			print ("Updating alpha_max. Current: ",alpha)
 			# Decrease alpha max to search lower alphas
 			# (weight length higher in linear combination)
 			alpha_max = alpha
 		# Set alpha for binary search
 		alpha = (alpha_min + alpha_max) / 2
+		print ("Updated alpha ", alpha)
 				
 	
 	# Return the lowest elevation gain within max distance
@@ -190,8 +195,9 @@ def minimize_elevation_gain(graph, source, target, percent_shortest_path, iterat
 	# Note: Google Maps and OpenStreetMaps have different data and our UI path
 	# may differ from the actual path because of Google Map's intepretation of 
 	# the data it recieves.
-	ox.plot_graph_route(graph, best_path['path'])
+	#ox.plot_graph_route(graph, best_path['path'])
     
+	print ("Ready to exit")
 	return (best_path_dist, best_path_gain, best_edge_path)
 
 

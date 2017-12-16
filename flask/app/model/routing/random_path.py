@@ -5,14 +5,13 @@ import random
 
 class random_path:
 
-    def __init__(self,graph, source, target, percent_shortest_path, cutoff):
+    def __init__(self, graph, source, target, percent_shortest_path, cutoff):
         self.random_paths = []
         self.graph = graph
         self.percent_shortest_path = percent_shortest_path
         self.shortest_path = nx.shortest_path(self.graph, source, target, 'length')
         self.max_length = nx.shortest_path_length(graph, source, target, 'length') * self.percent_shortest_path
         self.build_random_paths(cutoff)
-
 
     def build_random_paths(self, cutoff):
         graph = self.graph
