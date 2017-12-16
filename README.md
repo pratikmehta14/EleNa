@@ -39,7 +39,7 @@ flask run                     #Alternatively: python -m flask run
 Open templates/index.html in Google Chrome web browser.
 
 ### Using the Interface
-![EleNa Interface](EleNa.PNG "Interface")
+![EleNa Interface](Pictures/EleNa.PNG "Interface")
 
 1. Here, you would click somewhere on the map to the left to input a starting point for your route, then you would click elsewhere on the map to input your destination. Alternatively, you may also manually enter those points in the space provided.
 
@@ -55,5 +55,12 @@ Open templates/index.html in Google Chrome web browser.
 # Examples
 
 ### Minimization
+![EleNa Minimization](Pictures/EleNa_example_min.PNG)
+
+In this example, we try to minimize elevation gain along our route from Valley Lane, Amherst, to Wildwood Lane, Amherst. We type in the street addresses into the appropriate boxes, and for this case we choose a maximum percent of shortest path to be 200%. We choose "minimum" from the "Elevation" dropdown menu, and then click submit for EleNa to generate our route. The path is then seen on the map.
+
 
 ### Maximization
+![EleNa Interface](Pictures/EleNa_example_max.PNG)
+
+In this example, we try to maximize elevation gain along our route starting from the Haigis Mall in Umass Amherst, and ending on Olympia Drive, Amherst. The two addresses and written into the appropriate boxes and we change the slider to be 200%, and choose to maxmize elevation by choosing "maximum" under the "Elevation" dropdown menu. After clicking submit, we have a path with many uphill segments.
