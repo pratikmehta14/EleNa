@@ -1,8 +1,10 @@
 # EleNa
-Elevation-based navigation
+Elevation-based Navigation (EleNa) is a map based application that gives the user a hiking route between any two points on the map that either minimizes or maximizes the elevation gain and is within “x%” of the shortest path possible where x is user specified.
 
 ### By RandomMax:
 Bhuvana Surapaneni, Jeremy Doyle, Benjamin Guinsburg, Dilip Chakravarthy Kavarthapu, Pratik Mehta
+
+# Set-up
 
 ### Installing OSMnx
 with pip:
@@ -21,11 +23,14 @@ conda install -c conda-forge osmnx
 pip install -U googlemaps
 
 ```
-# Using the Application
-Download CORS Google Chrome Extension:  
+### Installing CORS Google Chrome Extension
+Download Link:  
 https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
 
-Make sure you have osmnx and googlemaps installed.
+# Using the Application
+
+Make sure you have osmnx, googlemaps, and the CORS extension installed.  
+
 flask/app/routes.py has the code to render the HTML.  
 To run flask:
 ```
