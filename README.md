@@ -51,3 +51,9 @@ Open templates/index.html in Google Chrome web browser.
 5. This box will contain the elevation gain of the generated route, its total length, as well as specific information about the segments of the generated route.
 
 6. This map is used to specify where you'd like your start and endpoints to be, and once a route is created for you, it will be drawn onto this map.
+
+# Examples
+
+### Minimization
+
+### Maximization
